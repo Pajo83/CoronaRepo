@@ -1,0 +1,65 @@
+﻿@page
+@model CoronaApp.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Patient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Patient.Age" class="control-label"></label>
+                <input asp-for="Patient.Age" class="form-control" />
+                <span asp-validation-for="Patient.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.Name" class="control-label"></label>
+                <input asp-for="Patient.Name" class="form-control" />
+                <span asp-validation-for="Patient.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.Location" class="control-label"></label>
+                <select class="form-control" asp-for="Patient.Location" asp-items="@Model.Locations">
+                    <option value="">Pick a City</option>
+                </select>
+                <span asp-validation-for="Patient.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.Infected" class="control-label"></label>
+                <select class="form-control" asp-for="Patient.Infected" asp-items="@Model.Infected">
+                    <option value="">Pick infected</option>
+                </select>
+                <span asp-validation-for="Patient.Infected" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.PatientState" class="control-label"></label>
+                <select class="form-control" asp-for="Patient.PatientState" asp-items="@Model.PatientState">
+                    <option value="">Pick a state</option>
+                </select>
+                <span asp-validation-for="Patient.PatientState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Patient.Diagnose" class="control-label"></label>
+                <input asp-for="Patient.Diagnose" class="form-control" />
+                <span asp-validation-for="Patient.Diagnose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
