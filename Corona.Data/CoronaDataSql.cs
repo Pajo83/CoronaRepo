@@ -25,10 +25,21 @@ namespace Corona.Data
             return coronaDbContext.Patients.Count();
         }
 
+        public int CountHospitals()
+        {
+            return coronaDbContext.Hospitals.Count();
+        }
+
+
         public Patient Create(Patient patient)
         {
             coronaDbContext.Patients.Add(patient);
             return patient;
+        }
+        public Hospital Create(Hospital hospital)
+        {
+            coronaDbContext.Hospitals.Add(hospital);
+            return hospital;
         }
 
         public Patient Delete(int patientId)
@@ -45,6 +56,10 @@ namespace Corona.Data
         {
             return coronaDbContext.Patients.SingleOrDefault(p => p.Id == patientId);
         }
+        public Hospital GetHospitalById(int hospitalId)
+        {
+            return coronaDbContext.Hospitals.SingleOrDefault(h => h.Id == hospitalId);
+        }
 
         public IEnumerable<Patient> GetPatients(string name = null)
         {
@@ -56,6 +71,11 @@ namespace Corona.Data
         {
            coronaDbContext.Entry(patient).State = EntityState.Modified;
             return patient;
+        }
+        public Hospital Update(Hospital hospital)
+        {
+            coronaDbContext.Entry(hospital).State = EntityState.Modified;
+            return hospital;
         }
     }
 }

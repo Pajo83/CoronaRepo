@@ -17,5 +17,7 @@ namespace Corona.Core
         public PatientState PatientState { get; set; }
         [Required, StringLength(300)]
         public string Diagnose { get; set; }
+        public History History { get; set; }
+        public Hospital Hospital { get; set; }
     }
 }

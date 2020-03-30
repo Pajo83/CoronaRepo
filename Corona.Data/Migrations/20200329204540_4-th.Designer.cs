@@ -4,14 +4,16 @@ using Corona.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Corona.Data.Migrations
 {
     [DbContext(typeof(CoronaDbContext))]
-    partial class CoronaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200329204540_4-th")]
+    partial class _4th
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,24 +34,7 @@ namespace Corona.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Histories");
-                });
-
-            modelBuilder.Entity("Corona.Core.Hospital", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("HospitalName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hospitals");
+                    b.ToTable("History");
                 });
 
             modelBuilder.Entity("Corona.Core.Patient", b =>
@@ -70,9 +55,6 @@ namespace Corona.Data.Migrations
                     b.Property<int?>("HistoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("HospitalId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Infected")
                         .HasColumnType("int");
 
@@ -91,8 +73,6 @@ namespace Corona.Data.Migrations
 
                     b.HasIndex("HistoryId");
 
-                    b.HasIndex("HospitalId");
-
                     b.ToTable("Patients");
                 });
 
@@ -101,10 +81,6 @@ namespace Corona.Data.Migrations
                     b.HasOne("Corona.Core.History", "History")
                         .WithMany()
                         .HasForeignKey("HistoryId");
-
-                    b.HasOne("Corona.Core.Hospital", "Hospital")
-                        .WithMany()
-                        .HasForeignKey("HospitalId");
                 });
 #pragma warning restore 612, 618
         }

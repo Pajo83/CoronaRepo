@@ -18,7 +18,9 @@ namespace CoronaApp
         public IEnumerable<SelectListItem> Locations { get; set; }
         public IEnumerable<SelectListItem> Infected { get; set; }
         public IEnumerable<SelectListItem> PatientState { get; set; }
+        public Hospital Hospital { get; set; }
 
+        public SelectList Hospitals;
         public EditModel(Corona.Data.CoronaDbContext context, IHtmlHelper htmlHelper)
         {
             _context = context;
@@ -46,6 +48,7 @@ namespace CoronaApp
             Locations = _htmlHelper.GetEnumSelectList<City>();
             Infected = _htmlHelper.GetEnumSelectList<Infected>();
             PatientState = _htmlHelper.GetEnumSelectList<PatientState>();
+            Hospitals = new SelectList(_context.Hospitals.ToList(), "Id", "HospitalName", Patient.Hospital);
             return Page();
         }
 
@@ -56,6 +59,7 @@ namespace CoronaApp
             Locations = _htmlHelper.GetEnumSelectList<City>();
             Infected = _htmlHelper.GetEnumSelectList<Infected>();
             PatientState = _htmlHelper.GetEnumSelectList<PatientState>();
+            Hospitals = new SelectList(_context.Hospitals.ToList(), "Id", "HospitalName", Patient.Hospital);
             if (!ModelState.IsValid)
             {
                 return Page();

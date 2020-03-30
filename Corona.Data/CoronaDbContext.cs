@@ -14,5 +14,7 @@ namespace Corona.Data
         }
 
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Hospital> Hospitals { get; set; }
+        public DbSet<History> Histories { get; set; }
     }
 }

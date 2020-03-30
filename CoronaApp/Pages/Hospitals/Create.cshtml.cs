@@ -8,40 +8,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Corona.Core;
 using Corona.Data;
 
-
-
 namespace CoronaApp
-{
-    public class CreateModel : PageModel
+{ 
+    public class CreateHospitalModel : PageModel
     {
         private readonly Corona.Data.CoronaDbContext _context;
-        private readonly IHtmlHelper _htmlHelper;
-        public IEnumerable<SelectListItem> Locations { get; set; }
-        public IEnumerable<SelectListItem> Infected { get; set; }
-        public IEnumerable<SelectListItem> PatientState { get; set; }
-        public Hospital Hospital { get; set; }
 
-        public SelectList Hospitals;
-
-        public CreateModel(Corona.Data.CoronaDbContext context, IHtmlHelper htmlHelper)
+        public CreateHospitalModel(Corona.Data.CoronaDbContext context)
         {
             _context = context;
-            _htmlHelper = htmlHelper;
         }
 
         public IActionResult OnGet()
         {
-            Locations = _htmlHelper.GetEnumSelectList<City>();
-            Infected = _htmlHelper.GetEnumSelectList<Infected>();
-            PatientState = _htmlHelper.GetEnumSelectList<PatientState>();
-            Hospitals = new SelectList(_context.Hospitals.ToList(), "Id", "HospitalName");
             return Page();
         }
 
-      
-
         [BindProperty]
-        public Patient Patient { get; set; }
+        public Hospital Hospital { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -52,9 +36,8 @@ namespace CoronaApp
                 return Page();
             }
 
-            _context.Patients.Add(Patient);
+            _context.Hospitals.Add(Hospital);
             await _context.SaveChangesAsync();
-
 
             return RedirectToPage("./Index");
         }
