@@ -21,6 +21,7 @@ namespace CoronaApp
 
         [BindProperty]
         public Patient Patient { get; set; }
+        public Hospital Hospital { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,6 +31,7 @@ namespace CoronaApp
             }
 
             Patient = await _context.Patients.FirstOrDefaultAsync(m => m.Id == id);
+            Hospital = await _context.Hospitals.FirstOrDefaultAsync(m => m.Id == Patient.HospitalId);
 
             if (Patient == null)
             {

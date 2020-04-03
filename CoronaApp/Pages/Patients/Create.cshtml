@@ -24,8 +24,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Patient.Hospital" class="control-label"></label>
-                @Html.DropDownListFor(m => m.Hospital, Model.Hospitals, new { @class = "form-control" })
-                <span asp-validation-for="Patient.Location" class="text-danger"></span>
+                @Html.DropDownListFor(m=> m.Patient.HospitalId, Model.Hospitals, new { @class = "form-control"})
+                <span asp-validation-for="Patient.Hospital" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Patient.Location" class="control-label"></label>

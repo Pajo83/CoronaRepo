@@ -12,5 +12,6 @@ namespace Corona.Core
         public string HospitalName { get; set; }
 
         public List<Patient> Patients = new List<Patient>();
+
     }
 }

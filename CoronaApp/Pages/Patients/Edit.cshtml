@@ -26,8 +26,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Patient.Hospital" class="control-label"></label>
-                @Html.DropDownListFor(m => m.Hospital, Model.Hospitals, new { @class = "form-control" })
-                <span asp-validation-for="Patient.Location" class="text-danger"></span>
+                @Html.DropDownListFor(m => m.Patient.HospitalId, Model.Hospitals, new { @class = "form-control" })
+                <span asp-validation-for="Patient.Hospital" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Patient.Location" class="control-label"></label>
@@ -63,7 +63,7 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index"class="btn btn-primary">Back to List</a>
 </div>
 
 @section Scripts {

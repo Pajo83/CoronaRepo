@@ -19,7 +19,6 @@ namespace CoronaApp
         public IEnumerable<SelectListItem> Locations { get; set; }
         public IEnumerable<SelectListItem> Infected { get; set; }
         public IEnumerable<SelectListItem> PatientState { get; set; }
-        public Hospital Hospital { get; set; }
 
         public SelectList Hospitals;
 
@@ -34,7 +33,20 @@ namespace CoronaApp
             Locations = _htmlHelper.GetEnumSelectList<City>();
             Infected = _htmlHelper.GetEnumSelectList<Infected>();
             PatientState = _htmlHelper.GetEnumSelectList<PatientState>();
-            Hospitals = new SelectList(_context.Hospitals.ToList(), "Id", "HospitalName");
+            var list = new List<SelectListItem>();
+            var items = from n in _context.Hospitals
+                        select new SelectListItem
+                        {
+                            Text = n.HospitalName,
+                            Value = n.Id.ToString()
+                        };
+            //*Add your items to List
+            foreach (var item in items)
+                list.Add(item);
+
+            var hospitals = _context.Hospitals.Select(o => new { ID = o.Id, Name = o.HospitalName });
+
+            Hospitals = new SelectList(hospitals, "ID", "Name");
             return Page();
         }
 
@@ -42,7 +54,6 @@ namespace CoronaApp
 
         [BindProperty]
         public Patient Patient { get; set; }
-
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
